@@ -87,7 +87,7 @@
     // Create the iframe
     const iframe = document.createElement("iframe");
     iframe.id = "custom-iframe";
-    iframe.src = "http://localhost:3001/home";
+    iframe.src = "http://interactive.proximaai.co/home";
 
     // Append elements
     iframeContainer.appendChild(closeButton);
