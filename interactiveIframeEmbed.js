@@ -1,6 +1,8 @@
 (function () {
     console.log("Widget script loaded!");
 
+    // This is a self-invoking function that will run as soon as the script is loaded
+console.log("This is a self-invoking function that will run as soon as the script is loaded")
     // Styles for the widget and iframe
     const styles = `
         #custom-widget {
