@@ -25,7 +25,7 @@ console.log("This is a self-invoking function that will run as soon as the scrip
         bottom: 20px;
         right: 20px;
         width: 500px;
-        height: 98vh;
+        height: 96vh;
         display: none;
         flex-direction: column;
         z-index: 9999;
@@ -66,8 +66,8 @@ console.log("This is a self-invoking function that will run as soon as the scrip
     }
     @media (min-width: 769px) {
         #custom-iframe-container {
-            border-radius: 20px; /* Add border-radius for larger screens */
-            overflow: hidden; /* Prevent content overflow */
+            border-radius: 20px;
+            overflow: hidden; 
         }
     }
 `;
