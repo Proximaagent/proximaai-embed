@@ -74,6 +74,7 @@
             height: 30px;
             line-height: 30px;
             font-size: 14px;
+            border-radius: 5px;
         }
     }
     @media (min-width: 769px) {
