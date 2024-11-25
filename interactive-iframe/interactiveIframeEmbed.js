@@ -1,10 +1,22 @@
 (function () {
-    console.log("Widget script loaded!");
+    const script = document.currentScript; // Get the script element
+    const widgetText = script.dataset.widgetText || "Open";
+    const iframeSrc =
+      script.dataset.iframeSrc || "https://interactive.proximaai.co/home";
+    const widgetStyle = script.dataset.widgetStyle
+      ? JSON.parse(script.dataset.widgetStyle)
+      : {};
+    const iframeContainerStyle = script.dataset.iframeContainerStyle
+      ? JSON.parse(script.dataset.iframeContainerStyle)
+      : {};
+    const closeButtonStyle = script.dataset.closeButtonStyle
+      ? JSON.parse(script.dataset.closeButtonStyle)
+      : {};
 
-    // This is a self-invoking function that will run as soon as the script is loaded
-console.log("This is a self-invoking function that will run as soon as the script is loaded")
-    // Styles for the widget and iframe
-    const styles = `
+    console.log("Widget script loaded with custom data!");
+
+    // Default styles
+    const defaultStyles = `
     #custom-widget {
         position: fixed;
         bottom: 20px;
@@ -71,47 +83,47 @@ console.log("This is a self-invoking function that will run as soon as the scrip
         }
     }
 `;
-
-    // Inject styles into the page
     const styleSheet = document.createElement("style");
     styleSheet.type = "text/css";
-    styleSheet.innerText = styles;
+    styleSheet.innerText = defaultStyles;
     document.head.appendChild(styleSheet);
 
-    // Create the widget element
     const widget = document.createElement("div");
     widget.id = "custom-widget";
-    widget.innerText = "Open";
+    widget.innerText = widgetText;
 
-    // Create the iframe container
+    // Apply custom widget styles
+    Object.assign(widget.style, widgetStyle);
+
     const iframeContainer = document.createElement("div");
     iframeContainer.id = "custom-iframe-container";
 
-    // Create the close button
+    // Apply custom iframe container styles
+    Object.assign(iframeContainer.style, iframeContainerStyle);
+
     const closeButton = document.createElement("div");
     closeButton.id = "close-btn";
     closeButton.innerText = "Close";
 
-    // Create the iframe
+    // Apply custom close button styles
+    Object.assign(closeButton.style, closeButtonStyle);
+
     const iframe = document.createElement("iframe");
     iframe.id = "custom-iframe";
-    iframe.src = "https://interactive.proximaai.co/home";
+    iframe.src = iframeSrc;
 
-    // Append elements
     iframeContainer.appendChild(closeButton);
     iframeContainer.appendChild(iframe);
     document.body.appendChild(widget);
     document.body.appendChild(iframeContainer);
 
-    // Add click event to widget to toggle iframe
     widget.onclick = () => {
-        widget.style.display = "none"; // Hide widget
-        iframeContainer.style.display = "flex"; // Show iframe
+      widget.style.display = "none";
+      iframeContainer.style.display = "flex";
     };
 
-    // Add click event to close button to collapse iframe
     closeButton.onclick = () => {
-        iframeContainer.style.display = "none"; // Hide iframe
-        widget.style.display = "flex"; // Show widget
+      iframeContainer.style.display = "none";
+      widget.style.display = "flex";
     };
-})();
+  })();
