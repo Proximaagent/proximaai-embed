@@ -27,6 +27,7 @@ Once the interactiveIframeEmbed.min.js file is generated, it can be uploaded to 
   data-widget-style='{"backgroundColor":"#2daab1","color":"white"}'
   data-iframe-container-style='{"borderColor":"#2daab1"}'
   data-close-button-style='{"backgroundColor":"#2daab1"}'
+  data-icon-color="#2daab1"> // Pass color or a valid color code
 />
 // The iframe is now fully customizable
 ```
