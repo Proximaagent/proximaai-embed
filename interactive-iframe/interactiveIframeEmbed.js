@@ -13,69 +13,68 @@
     : {};
   const iconColor = script.dataset.iconColor || "#2daab1";
 
-
   // Default styles
   const defaultStyles = `
-#custom-widget {
-position: fixed;
-bottom: 20px;
-right: 20px;
-width: 60px;
-height: 60px;
-display: flex;
-justify-content: center;
-align-items: center;
-border-radius: 50%;
-cursor: pointer;
-z-index: 9999;
-background: #000;
-}
-#custom-iframe-container {
-position: fixed;
-bottom: 20px;
-right: 20px;
-width: 500px;
-height: 96vh;
-display: none;
-flex-direction: column;
-z-index: 9999;
-border: 1px solid #ccc;
-background-color: #fff;
-}
-#custom-iframe {
-flex-grow: 1;
-border: none;
-}
-#close-btn {
-height: 40px;
-background-color: #000;
-color: #fff;
-cursor: pointer;
-text-align: center;
-line-height: 40px;
-display: flex;
-justify-content: space-between;
-padding: 0 10px;
-}
-@media (max-width: 768px) {
-#custom-iframe-container {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
+          #custom-widget {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          width: 60px;
+          height: 60px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          cursor: pointer;
+          z-index: 9999;
+          background: ${widgetStyle.background || '#000'};
+          }
+          #custom-iframe-container {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          width: 500px;
+          height: 96vh;
+          display: none;
+          flex-direction: column;
+          z-index: 9999;
+          border: 1px solid ${iframeContainerStyle.borderColor || '#ccc'};
+          background-color: ${iframeContainerStyle.backgroundColor || '#fff'};
+          }
+          #custom-iframe {
+          flex-grow: 1;
+          border: none;
+          }
+          #close-btn {
+          height: 40px;
+          background-color: ${closeButtonStyle.backgroundColor || '#000'};
+          color: ${closeButtonStyle.color || iconColor};
+          cursor: pointer;
+          text-align: center;
+          line-height: 40px;
+          display: flex;
+          justify-content: space-between;
+          padding: 0 10px;
+          }
+          @media (max-width: 768px) {
+          #custom-iframe-container {
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              width: 100%;
+              height: 100%;
+              border: none;
+          }
 
-}
-@media (min-width: 769px) {
-#custom-iframe-container {
-    border-radius: 20px;
-    overflow: hidden; 
-}
-}
-`;
+          }
+          @media (min-width: 769px) {
+          #custom-iframe-container {
+              border-radius: 20px;
+              overflow: hidden; 
+          }
+          }
+          `;
   const styleSheet = document.createElement("style");
   styleSheet.type = "text/css";
   styleSheet.innerText = defaultStyles;
