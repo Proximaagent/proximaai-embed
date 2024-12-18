@@ -1,5 +1,5 @@
 (function () {
-  const script = document.currentScript;
+  const script = document.currentScript; // Get the script element
   const iframeSrc =
     script.dataset.iframeSrc || "https://interactive.proximaai.co/home";
   const widgetStyle = script.dataset.widgetStyle
@@ -12,6 +12,7 @@
     ? JSON.parse(script.dataset.closeButtonStyle)
     : {};
   const iconColor = script.dataset.iconColor || "#2daab1";
+
 
   // Default styles
   const defaultStyles = `
@@ -52,6 +53,9 @@ color: #fff;
 cursor: pointer;
 text-align: center;
 line-height: 40px;
+display: flex;
+justify-content: space-between;
+padding: 0 10px;
 }
 @media (max-width: 768px) {
 #custom-iframe-container {
@@ -63,16 +67,7 @@ line-height: 40px;
     height: 100%;
     border: none;
 }
-#close-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 60px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 14px;
-    border-radius: 5px;
-}
+
 }
 @media (min-width: 769px) {
 #custom-iframe-container {
@@ -119,7 +114,12 @@ line-height: 40px;
 
   const closeButton = document.createElement("div");
   closeButton.id = "close-btn";
-  closeButton.innerText = "Close";
+  const dateSpan = document.createElement("span");
+  dateSpan.innerText = new Date().toLocaleDateString();
+  const closeIcon = document.createElement("span");
+  closeIcon.innerHTML = "&times;";
+  closeButton.appendChild(dateSpan);
+  closeButton.appendChild(closeIcon);
 
   // Apply custom close button styles
   Object.assign(closeButton.style, closeButtonStyle);
