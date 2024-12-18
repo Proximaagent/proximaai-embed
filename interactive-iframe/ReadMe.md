@@ -31,3 +31,6 @@ Once the interactiveIframeEmbed.min.js file is generated, it can be uploaded to 
 />
 // The iframe is now fully customizable
 ```
+
+
+Authors: [ M.I.Titus ]
