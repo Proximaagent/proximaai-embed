@@ -21,7 +21,7 @@ Once the interactiveIframeEmbed.min.js file is generated, it can be uploaded to 
 ```js
 <script
   id="proximaai-embed-script"
-  src="https://cdn.jsdelivr.net/gh/Proximaagent/proximaai-embed@v1.0.4-beta/interactive-iframe/interactiveIframeEmbed.min.js"
+  src="https://cdn.jsdelivr.net/gh/Proximaagent/proximaai-embed@v1.1.6-beta/interactive-iframe/interactiveIframeEmbed.min.js"
   data-widget-text="Open"
   data-iframe-src="https://interactive.proximaai.co/?auth_uri=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNzM3NzExNDQzfQ.PgZ8az8NJ_L-V8rwSLh4L1eYzEbpSb1i2Dg1WRnjaqU&is_auth=false&theme=light&color=turquoise"
   data-widget-style='{"backgroundColor":"#2daab1","color":"white"}'
