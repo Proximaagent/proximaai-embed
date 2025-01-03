@@ -141,4 +141,23 @@
     iframeContainer.style.display = "none";
     widget.style.display = "flex";
   };
+
+  // Function to check if the iframe's white listed
+  function isAllowedDomain(iframeDomain) {
+    return iframeDomain.endsWith('proximaai.co') || iframeDomain === 'localhost' || iframeDomain === '127.0.0.1';
+  }
+
+  // Listen for the iframe to load and then send the host domain to the iframe
+  iframe.onload = function() {
+    const iframeDomain = iframe.contentWindow.location.hostname;
+
+    if (isAllowedDomain(iframeDomain)) {
+      // Send the host domain to the iframe
+      iframe.contentWindow.postMessage({
+        host: window.location.hostname
+      }, iframeSrc); 
+    } else {
+      console.warn('Iframe domain is not allowed:', iframeDomain);
+    }
+  };
 })();
