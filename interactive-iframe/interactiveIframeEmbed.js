@@ -47,7 +47,7 @@
           }
           #close-btn {
           height: 40px;
-          background-color: #fff;
+          
           color: ${closeButtonStyle.color || iconColor};
           cursor: pointer;
           text-align: center;
