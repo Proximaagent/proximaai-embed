@@ -16,6 +16,7 @@
   const appId = script.dataset.appId;
   const tenantId = script.dataset.tenantId;
   async function init() {
+    console.log(tenantId, appId);
     const hasSubscription = await checkTenantPlatformSubscription(
       tenantId,
       appId
