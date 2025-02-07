@@ -285,11 +285,6 @@
 
       const data = await response.json();
 
-      // First check if tenant has any active subscription
-      if (!data.has_active_subscription) {
-        return false;
-      }
-
       // Find the specific platform subscription
       const platformSubscription = data.subscription_platforms.find(
         (platform) => platform.platform_name === appId
