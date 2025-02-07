@@ -261,6 +261,7 @@
   // Verify tenantId and appId to tell if the iframe should mount.
 
   async function checkTenantPlatformSubscription(tenantId, appId) {
+    console.log(tenantId, appId);
     // Return false if either parameter is missing
     if (!tenantId || !appId) {
       return false; //return early
