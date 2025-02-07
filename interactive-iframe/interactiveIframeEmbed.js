@@ -18,7 +18,7 @@
   async function init() {
     console.log(tenantId, appId);
     const hasSubscription = await checkTenantPlatformSubscription(
-      tenantId,
+      iframeSrc,
       appId
     );
 
@@ -261,16 +261,12 @@
 
   // Verify tenantId and appId to tell if the iframe should mount.
 
-  async function checkTenantPlatformSubscription(tenantId, appId) {
-    console.log(tenantId, appId);
-    // Return false if either parameter is missing
-    if (!tenantId || !appId) {
-      return false; //return early
-    }
+  async function checkTenantPlatformSubscription(iframeSrc, appId) {
+    const authToken = iframeSrc?.searchParams.get('auth_uri');
 
     try {
       const response = await fetch(
-        `https://core.proximaai.co/api/tenantmanagement/tenantdetails/?token=${tenantId}&platform=${appId}`,
+        `https://core.proximaai.co/api/tenantmanagement/tenantdetails/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZXhwIjoxNzU0MDU0NzQ2fQ.BP3xpdlr9JSdJMj0LEyzbIlKphW-x_7AaKscUDW_k5M&platform=${appId}`,
         {
           method: 'GET',
           headers: {
