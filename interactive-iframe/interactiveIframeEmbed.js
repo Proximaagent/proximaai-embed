@@ -13,11 +13,8 @@
     : {};
   const iconColor = script.dataset.iconColor || '#2daab1';
   const tenantName = script.dataset.tenantName || 'Proxima AI';
-  const appId = script.dataset.appId || 'cixs';
-  const tenantId =
-    script.dataset.tenantId ||
-    `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZXhwIjoxNzU0MDU0NzQ2fQ.BP3xpdlr9JSdJMj0LEyzbIlKphW-x_7AaKscUDW_k5M`;
-
+  const appId = script.dataset.appId;
+  const tenantId = script.dataset.tenantId;
   async function init() {
     const hasSubscription = await checkTenantPlatformSubscription(
       tenantId,
