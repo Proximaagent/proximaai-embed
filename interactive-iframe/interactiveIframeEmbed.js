@@ -261,39 +261,5 @@
 
   // Verify tenantId and appId to tell if the iframe should mount.
 
-  async function checkTenantPlatformSubscription(iframeSrc, appId) {
-    const authToken = iframeSrc?.searchParams.get('auth_uri');
-    console.log(authToken);
-
-    try {
-      const response = await fetch(
-        `https://core.proximaai.co/api/tenantmanagement/tenantdetails/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZXhwIjoxNzU0MDU0NzQ2fQ.BP3xpdlr9JSdJMj0LEyzbIlKphW-x_7AaKscUDW_k5M&platform=Portal`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (!response.ok) {
-        return false;
-      }
-
-      const data = await response.json();
-
-      // Find the specific platform subscription
-      const platformSubscription = data.subscription_platforms.find(
-        (platform) => platform.platform_name === appId
-      );
-
-      // Return true only if platform subscription exists and is active
-      return platformSubscription ? platformSubscription.is_active : false;
-    } catch (error) {
-      console.error('Error checking tenant subscription:', error);
-      return false;
-    }
-  }
-
   init();
 })();
