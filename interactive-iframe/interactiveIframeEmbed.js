@@ -263,10 +263,11 @@
 
   async function checkTenantPlatformSubscription(iframeSrc, appId) {
     const authToken = iframeSrc?.searchParams.get('auth_uri');
+    console.log(authToken);
 
     try {
       const response = await fetch(
-        `https://core.proximaai.co/api/tenantmanagement/tenantdetails/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZXhwIjoxNzU0MDU0NzQ2fQ.BP3xpdlr9JSdJMj0LEyzbIlKphW-x_7AaKscUDW_k5M&platform=${appId}`,
+        `https://core.proximaai.co/api/tenantmanagement/tenantdetails/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZXhwIjoxNzU0MDU0NzQ2fQ.BP3xpdlr9JSdJMj0LEyzbIlKphW-x_7AaKscUDW_k5M&platform=Portal`,
         {
           method: 'GET',
           headers: {
