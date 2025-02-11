@@ -13,10 +13,10 @@
     : {};
   const iconColor = script.dataset.iconColor || '#2daab1';
   const tenantName = script.dataset.tenantName || 'Proxima AI';
-  const appId = script.dataset.appId;
-  const tenantId = script.dataset.tenantId;
+  const appId = script.dataset.appId || '';
+  const tenantId = script.dataset.tenantId || '';
   async function init() {
-    console.log(tenantId, appId);
+    console.log(tenantId, appId, iframeSrc, iconColor, tenantName);
     const hasSubscription = await checkTenantPlatformSubscription(
       iframeSrc,
       appId
