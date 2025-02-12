@@ -259,6 +259,8 @@ padding: 0 10px;
     if (existingNotification) existingNotification.remove();
   }
 
+  const VALID_PLATFORMS = ['Portal', 'CIXS', 'CRM'];
+
   // Function to check subscription and mount iframe
   async function mountIframeIfSubscribed() {
     const isSubscribed = await checkTenantPlatformSubscription(
@@ -281,6 +283,16 @@ padding: 0 10px;
   // Your existing checkTenantPlatformSubscription function
   async function checkTenantPlatformSubscription(iframeSrc, appId) {
     try {
+      // Validate platform name
+      if (!VALID_PLATFORMS.includes(appId)) {
+        console.error(
+          `Invalid platform name: ${appId}. Must be one of: ${VALID_PLATFORMS.join(
+            ', '
+          )}`
+        );
+        return false;
+      }
+
       // Parse auth_uri from iframeSrc
       const url = new URL(iframeSrc);
       const authToken = url.searchParams.get('auth_uri');
