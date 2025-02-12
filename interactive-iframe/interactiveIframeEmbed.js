@@ -273,9 +273,9 @@ padding: 0 10px;
       const apiUrl = new URL(
         'https://core.proximaai.co/api/tenantmanagement/tenantdetails/'
       );
-      apiUrl.searchParams.append('token', authToken || ''); // Use authToken if available
-      apiUrl.searchParams.append('platform', appId); // Use dynamic appId
-      apiUrl.searchParams.append('tenant_id', tenantId); // Include tenantId
+      apiUrl.searchParams.append('token', authToken || '');
+      apiUrl.searchParams.append('platform', appId);
+      apiUrl.searchParams.append('tenant_id', tenantId);
 
       const response = await fetch(apiUrl, {
         method: 'GET',
@@ -285,11 +285,25 @@ padding: 0 10px;
       if (!response.ok) return false;
 
       const data = await response.json();
-      const platformSubscription = data.subscription_platforms?.find(
+      console.log('Subscription data:', data);
+
+      // Check if subscription_platforms exists and is an array
+      if (!Array.isArray(data.subscription_platforms)) {
+        console.error('Invalid subscription data format');
+        return false;
+      }
+
+      // Find the platform subscription and check if it's active
+      const platformSubscription = data.subscription_platforms.find(
         (platform) => platform.platform_name === appId
       );
 
-      return platformSubscription?.is_active || false;
+      if (!platformSubscription) {
+        console.log(`No subscription found for platform: ${appId}`);
+        return false;
+      }
+
+      return platformSubscription.is_active === true;
     } catch (error) {
       console.error('Error checking subscription:', error);
       return false;
