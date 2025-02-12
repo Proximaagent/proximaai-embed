@@ -13,7 +13,7 @@
     : {};
   const iconColor = script.dataset.iconColor || '#2daab1';
   const tenantName = script.dataset.tenantName || 'Proxima AI';
-  const appId = script.dataset.appId || '';
+  const appId = script.dataset.appId || 'Portal';
   const tenantId = script.dataset.tenantId || '';
 
   // Enhanced styles including notification
