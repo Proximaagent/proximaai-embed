@@ -244,6 +244,21 @@ padding: 0 10px;
   // Check and show notification on load
   showNotification();
 
+  // Function to clean up iframe elements
+  function cleanupIframeElements() {
+    const existingWidget = document.getElementById('custom-widget');
+    const existingContainer = document.getElementById(
+      'custom-iframe-container'
+    );
+    const existingNotification = document.getElementById(
+      'notification-container'
+    );
+
+    if (existingWidget) existingWidget.remove();
+    if (existingContainer) existingContainer.remove();
+    if (existingNotification) existingNotification.remove();
+  }
+
   // Function to check subscription and mount iframe
   async function mountIframeIfSubscribed() {
     const isSubscribed = await checkTenantPlatformSubscription(
@@ -256,6 +271,7 @@ padding: 0 10px;
       document.body.appendChild(notificationContainer);
     } else {
       console.log('User does not have an active subscription.');
+      cleanupIframeElements(); // Clean up any existing elements
     }
   }
 
