@@ -20,16 +20,17 @@ Once the interactiveIframeEmbed.min.js file is generated, it can be uploaded to 
 
 ```js
 <script
-  id="proximaai-cixs-embed-script"
+  id="proximaai-embed-script"
   src="https://cdn.jsdelivr.net/gh/Proximaagent/proximaai-embed@v1.1.6-beta/interactive-iframe/interactiveIframeEmbed.min.js"
-  data-iframe-src="https://interactive.proximaai.co/? auth_uri=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNzM3NzExNDQzfQ.PgZ8az8NJ_L-V8rwSLh4L1eYzEbpSb1i2Dg1WRnjaqU&is_auth=false&theme=light&color=turquoise" // This is generated dynamically be sure to cross check 
-  data-widget-style='{"backgroundColor":"#2daab1","color":"white"}'
-  data-iframe-container-style='{"borderColor":"#2daab1"}' // Tweak any css props
-  data-close-button-style='{"backgroundColor":"white"; color: black;}'
-  data-icon-color="#2daab1"> // Pass color or a valid color code
+  data-iframe-src="https://iframe.proximaai.co/?auth_uri=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZXhwIjoxNzU0MDU0NzQ2fQ.BP3xpdlr9JSdJMj0LEyzbIlKphW-x_7AaKscUDW_k5M&is_auth=false&theme=light&color=red"
+  data-iframe-container-style='{"borderColor":"#FE0182, "height":"96vh"}'
+  data-close-button-style='{"backgroundColor":"#FE0182","color":"#FFFFFF"}'
+  data-icon-color="#FE0182"
+  data-tenantId="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZXhwIjoxNzU0MDU0NzQ2fQ.BP3xpdlr9JSdJMj0LEyzbIlKphW-x_7AaKscUDW_k5M" // the auth URI identifying each tenant.
+  data-appId="CIXS"
+  data-tenantName="Proxima AI" // pass organization name
 />
 // The iframe is now fully customizable
 ```
-
 
 Authors: [ M.I.Titus ]

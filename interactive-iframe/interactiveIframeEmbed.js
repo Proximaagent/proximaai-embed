@@ -13,6 +13,8 @@
     : {};
   const iconColor = script.dataset.iconColor || '#2daab1';
   const tenantName = script.dataset.tenantName || 'Proxima AI';
+  const appId = script.dataset.appId || 'Portal';
+  const tenantId = script.dataset.tenantId || '';
 
   // Enhanced styles including notification
   const defaultStyles = `
@@ -82,7 +84,7 @@ position: fixed;
 bottom: 20px;
 right: 20px;
 width: 500px;
-height: 96vh;
+height: ${iframeContainerStyle.height || '96vh'};
 display: none;
 flex-direction: column;
 z-index: 9999;
@@ -204,9 +206,6 @@ padding: 0 10px;
 
   iframeContainer.appendChild(closeButton);
   iframeContainer.appendChild(iframe);
-  document.body.appendChild(widget);
-  document.body.appendChild(iframeContainer);
-  document.body.appendChild(notificationContainer);
 
   // Show notification function
   function showNotification() {
@@ -245,18 +244,97 @@ padding: 0 10px;
   // Check and show notification on load
   showNotification();
 
-  // Iframe message handling
-  iframe.onload = function () {
-    const iframeDomain = iframe.contentWindow.location.hostname;
-    if (iframeDomain) {
-      iframe.contentWindow.postMessage(
-        {
-          host: window.location.hostname,
-        },
-        iframeSrc
-      );
+  // Function to clean up iframe elements
+  function cleanupIframeElements() {
+    const existingWidget = document.getElementById('custom-widget');
+    const existingContainer = document.getElementById(
+      'custom-iframe-container'
+    );
+    const existingNotification = document.getElementById(
+      'notification-container'
+    );
+
+    if (existingWidget) existingWidget.remove();
+    if (existingContainer) existingContainer.remove();
+    if (existingNotification) existingNotification.remove();
+  }
+
+  const VALID_PLATFORMS = ['Portal', 'CIXS', 'CRM'];
+
+  // Function to check subscription and mount iframe
+  async function mountIframeIfSubscribed() {
+    const isSubscribed = await checkTenantPlatformSubscription(
+      iframeSrc,
+      appId
+    );
+    if (isSubscribed) {
+      document.body.appendChild(widget);
+      document.body.appendChild(iframeContainer);
+      document.body.appendChild(notificationContainer);
     } else {
-      console.warn('Iframe domain is not allowed:', iframeDomain);
+      console.log('User does not have an active subscription.');
+      cleanupIframeElements(); // Clean up any existing elements
     }
-  };
+  }
+
+  // Call the function to check subscription and mount iframe
+  mountIframeIfSubscribed();
+
+  // Your existing checkTenantPlatformSubscription function
+  async function checkTenantPlatformSubscription(iframeSrc, appId) {
+    try {
+      // Validate platform name
+      if (!VALID_PLATFORMS.includes(appId)) {
+        console.error(
+          `Invalid platform name: ${appId}. Must be one of: ${VALID_PLATFORMS.join(
+            ', '
+          )}`
+        );
+        return false;
+      }
+
+      // Parse auth_uri from iframeSrc
+      const url = new URL(iframeSrc);
+      const authToken = url.searchParams.get('auth_uri');
+
+      // Include tenantId and appId in the API request
+      const apiUrl = new URL(
+        'https://core.proximaai.co/api/tenantmanagement/tenantdetails/'
+      );
+      apiUrl.searchParams.append('token', authToken || '');
+      apiUrl.searchParams.append('platform', appId);
+      apiUrl.searchParams.append('tenant_id', tenantId);
+
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (!response.ok) return false;
+
+      const data = await response.json();
+      console.log('Subscription data:', data);
+
+      // Check if subscription_platforms exists and is an array
+      if (!Array.isArray(data.subscription_platforms)) {
+        console.error('Invalid subscription data format');
+        return false;
+      }
+
+      // Find the platform subscription and check if it's active
+      const platformSubscription = data.subscription_platforms.find(
+        (platform) => platform.platform_name === appId
+      );
+
+      if (!platformSubscription) {
+        console.log(`No subscription found for platform: ${appId}`);
+        return false;
+      }
+
+      return platformSubscription.is_active === true;
+    } catch (error) {
+      console.error('Error checking subscription:', error);
+      return false;
+    }
+  }
 })();
