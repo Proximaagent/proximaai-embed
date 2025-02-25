@@ -84,7 +84,7 @@ position: fixed;
 bottom: 20px;
 right: 20px;
 width: 500px;
-height: 96vh;
+height: ${iframeContainerStyle.height || '96vh'};
 display: none;
 flex-direction: column;
 z-index: 9999;
