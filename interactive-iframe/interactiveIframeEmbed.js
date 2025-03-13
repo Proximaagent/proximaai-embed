@@ -202,6 +202,8 @@ padding: 0 10px;
 
   const iframe = document.createElement('iframe');
   iframe.id = 'custom-iframe';
+  // Allow microphone and camera by default
+  iframe.allow = 'microphone; camera';
   iframe.src = iframeSrc;
 
   iframeContainer.appendChild(closeButton);
